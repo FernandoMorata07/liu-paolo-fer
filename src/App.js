@@ -9,16 +9,21 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { LoginPage } from "./pages/LoginPage";
 import { LinkPage } from "./pages/LinkPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { UserPage } from "./pages/UserPage";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { user } = useContext(AuthContext);
   return (
     <main className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={user ? <HomePage /> : <LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/link/:id" element={<LinkPage />} />
+        <Route path="/user/:id" element={<UserPage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

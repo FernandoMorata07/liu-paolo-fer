@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { getAllLinksServices } from "../services";
+import { getSingleLinkService } from "../services";
 
-export const useLinks = () => {
-  const [links, setLinks] = useState([]);
+export const useLink = (id) => {
+  const [link, setLink] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const loadLinks = async () => {
+    const loadLink = async () => {
       try {
         setLoading(true);
 
-        const data = await getAllLinksServices();
+        const data = await getSingleLinkService(id);
 
-        setLinks(data);
+        setLink(data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -21,8 +21,8 @@ export const useLinks = () => {
       }
     };
 
-    loadLinks();
-  }, []);
+    loadLink();
+  }, [id]);
 
-  return { links, loading, error };
+  return { link, loading, error };
 };

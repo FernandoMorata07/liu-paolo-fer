@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+
+import { AuthContext } from "../context/AuthContext";
 
 export const Auth = () => {
-  return (
-    <ul>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-    </ul>
-  );
+  const { user, logOut } = useContext(AuthContext);
+  return user ? (
+    <p>
+      Usuario: {user.nombre} registrado{" "}
+      <button onClick={() => logOut()}>Salir</button>
+    </p>
+  ) : null;
 };
