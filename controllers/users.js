@@ -54,6 +54,19 @@ const getUserController = async (req, res, next) => {
     }
 };
 
+const getMeController = async (req, res, next) => {
+    try {
+        const user = await getUserById(req.userId, false);
+
+        res.send({
+            status: 'ok',
+            data: user,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const loginController = async (req, res, next) => {
     try {
         //Validación con JOI
@@ -102,4 +115,5 @@ module.exports = {
     newUserController,
     getUserController,
     loginController,
+    getMeController,
 };
