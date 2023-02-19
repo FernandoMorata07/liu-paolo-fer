@@ -25,7 +25,7 @@ const getAllLinks = async () => {
         connection = await getConnection();
 
         const [result] = await connection.query(`
-        SELECT l.*, AVG(v.voto) avgVotos FROM links l LEFT JOIN votos v ON l.id = v.id_links GROUP BY l.id  ORDER BY createdLink DESC
+        SELECT u.nombre userName, l.*, AVG(v.voto) avgVotos FROM links l LEFT JOIN votos v ON l.id = v.id_links LEFT JOIN users u ON l.id_user = u.id GROUP BY l.id  ORDER BY createdLink DESC
       `);
 
         return result;
@@ -41,9 +41,7 @@ const getLinkById = async (id) => {
         connection = await getConnection();
 
         const [result] = await connection.query(
-            `
-        SELECT * FROM links WHERE id = ?
-      `,
+            ` SELECT u.nombre userName, l.*, AVG(v.voto) avgVotos FROM links l LEFT JOIN votos v ON l.id = v.id_links LEFT JOIN users u ON l.id_user = u.id WHERE l.id = ?`,
             [id]
         );
 
