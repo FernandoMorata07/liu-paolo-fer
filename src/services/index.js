@@ -71,8 +71,9 @@ export const getMyUserDataService = async ({ token }) => {
 export const sendLinkService = async ({ data, token }) => {
   const response = await fetch(`${process.env.REACT_APP_BACKEND}`, {
     method: "POST",
-    body: data,
+    body: JSON.stringify(data),
     headers: {
+      "Content-Type": "application/json",
       Authorization: token,
     },
   });
