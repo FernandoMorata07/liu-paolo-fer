@@ -10,6 +10,8 @@ import { LoginPage } from "./pages/LoginPage";
 import { LinkPage } from "./pages/LinkPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { UserPage } from "./pages/UserPage";
+import { LegalNotice } from "./pages/LegalNotice";
+import { AboutUs } from "./pages/AboutUs";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 
@@ -24,6 +26,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/link/:id" element={<LinkPage />} />
         <Route path="/user/:id" element={<UserPage />} />
+        <Route path="/legal-notice" element={<LegalNotice />} />
+        <Route path="/about-us" element={<AboutUs />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
