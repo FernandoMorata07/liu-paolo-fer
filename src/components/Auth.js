@@ -6,7 +6,7 @@ export const Auth = () => {
   const { user, logOut } = useContext(AuthContext);
   return user ? (
     <p>
-      Usuario: {user.nombre} registrado{" "}
+      Usuario: {user.nombre} registrado
       <button onClick={() => logOut()}>Salir</button>
     </p>
   ) : null;

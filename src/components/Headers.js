@@ -8,11 +8,13 @@ export const Header = () => {
   return (
     <header>
       <h1>
-        <Link to="/">SOCIAL LINKS</Link>
+        <Link to="/">SOCIAL LINK</Link>
       </h1>
       <nav>
         <Auth />
       </nav>
+      <br />
+      <hr />
     </header>
   );
 };

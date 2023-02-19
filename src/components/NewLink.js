@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { sendLinkService } from "../services";
 
-export const NewLink = () => {
+export const NewLink = ({ addLink }) => {
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const { token } = useContext(AuthContext);
@@ -13,9 +13,11 @@ export const NewLink = () => {
 
     try {
       setSending(true);
-      const data = new FormData(e.target);
-
-      console.log(data);
+      const data = Object.fromEntries(new FormData(e.target));
+      const createdLink = await sendLinkService({ data, token });
+      addLink(createdLink);
+      setError("");
+      e.target.reset();
     } catch (error) {
       setError(error.message);
     } finally {
@@ -27,17 +29,34 @@ export const NewLink = () => {
     <form onSubmit={handleForm}>
       <h1>Crea tu nuevo link</h1>
       <fieldset>
-        <label htmlFor="text">title</label>
-        <input type="text" id="title" name="title" required />
+        <label htmlFor="text">título</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          placeholder="Título de la publicación"
+        />
       </fieldset>
       <fieldset>
         <label htmlFor="url">URL</label>
-        <input type="url" id="url" name="url" required />
+        <input
+          type="url"
+          id="url"
+          name="url"
+          required
+          defaultValue={"https://www."}
+        />
       </fieldset>
 
       <fieldset>
-        <label htmlFor="text">descripcion</label>
-        <input type="text" id="descripcion" name="titulo" />
+        <label htmlFor="text">descripción</label>
+        <input
+          type="text"
+          id="descripcion"
+          name="description"
+          placeholder="Descripción de la publicación"
+        />
       </fieldset>
 
       <button>Enviar link</button>
