@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useLinks } from "../hooks/useLinks";
 
 export const HomePage = () => {
-  const { links, loading, error } = useLinks();
+  const { links, loading, addLink, error } = useLinks();
   const { user } = useContext(AuthContext);
 
   if (loading) return <p>cargando links...</p>;
@@ -15,8 +15,8 @@ export const HomePage = () => {
   console.log(links);
   return (
     <section>
-      <h1>Todos los links</h1>
-      {user ? <NewLink /> : null}
+      <h2>Aquí están los links publicados</h2>
+      {user ? <NewLink addLink={addLink} /> : null}
       <LinksList links={links} />
     </section>
   );

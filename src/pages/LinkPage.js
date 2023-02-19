@@ -13,7 +13,7 @@ export const LinkPage = () => {
 
   return (
     <section>
-      <h1>link</h1>
+      <h2>link</h2>
       <SingleLink link={link} />
     </section>
   );

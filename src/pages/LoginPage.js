@@ -26,10 +26,10 @@ export const LoginPage = () => {
 
   return (
     <section>
-      <h1>Página de Login</h1>
+      <h2>Página de Login</h2>
       <form onSubmit={handleForm}>
         <fieldset>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email </label>
           <input
             type="email"
             id="email"
@@ -39,7 +39,7 @@ export const LoginPage = () => {
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="password">Contraseña</label>
+          <label htmlFor="password">Contraseña </label>
           <input
             type="password"
             id="password"
@@ -53,8 +53,8 @@ export const LoginPage = () => {
         {error ? <p>{error}</p> : null}
 
         <p>
-          Si no estás registrado ...
-          <Link to={"/register"}>Registrate</Link>
+          Si no estás registrado...¿a qué esperas?{" "}
+          <Link to={"/register"}>Regístrate</Link>
         </p>
       </form>
     </section>

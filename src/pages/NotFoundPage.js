@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 export const NotFoundPage = () => {
   return (
     <section>
-      <h1>Not found</h1>
-      <Link to={"/"}>Go to home Page</Link>
+      <h2>Error 404: Not Found</h2>
+      <p>Ooops...esa página no existe</p>
+      <Link to={"/"}>Volver a la página inicial</Link>
     </section>
   );
 };
