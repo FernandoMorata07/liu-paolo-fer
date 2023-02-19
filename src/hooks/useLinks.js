@@ -24,5 +24,9 @@ export const useLinks = () => {
     loadLinks();
   }, []);
 
-  return { links, loading, error };
+  const addLink = (newLink) => {
+    setLinks([newLink, ...links]);
+  };
+
+  return { links, loading, addLink, error };
 };
