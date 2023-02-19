@@ -28,11 +28,14 @@ const newLinkController = async (req, res, next) => {
 
         const { title, url, description } = req.body;
 
-        const newLink = { title, url, description, idUser: req.userId };
+        const insertId = await insertLink({
+            title,
+            url,
+            description,
+            idUser: req.userId,
+        });
 
-        const insertId = await insertLink(newLink);
-
-        newLink.id = insertId;
+        const newLink = await getLinkById(insertId);
 
         res.send({
             status: 'OK',
