@@ -1,0 +1,8 @@
+20/02
+
+- Queda pendiente mirar porque el req.idUser del controller de deleteLinkById (en el back "./controllers/links") 
+sale undefined y de consecuencia no funciona.
+
+- Poner el Footer fuera del main.
+
+- 
