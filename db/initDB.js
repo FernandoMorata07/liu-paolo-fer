@@ -32,8 +32,10 @@ async function main() {
         title VARCHAR(200) NOT NULL,
         description VARCHAR(5000) NOT NULL,
       id_user INT UNSIGNED NOT NULL,
-        FOREIGN KEY (id_user) REFERENCES users (id),
-        createdLink DATETIME DEFAULT CURRENT_TIMESTAMP
+      FOREIGN KEY (id_user) REFERENCES users (id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,    
+      createdLink DATETIME DEFAULT CURRENT_TIMESTAMP
     )
     `);
 
@@ -43,8 +45,10 @@ async function main() {
        voto INT UNSIGNED NOT NULL,
         id_users INT UNSIGNED NOT NULL,
         id_links INT UNSIGNED NOT NULL,
-        FOREIGN KEY (id_users) REFERENCES users (id),
+        FOREIGN KEY (id_users) REFERENCES users (id)
+        ON DELETE CASCADE,
         FOREIGN KEY (id_links) REFERENCES links (id)
+        ON DELETE CASCADE
     );
     
     `);
