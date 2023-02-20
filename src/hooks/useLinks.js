@@ -28,5 +28,9 @@ export const useLinks = () => {
     setLinks([newLink, ...links]);
   };
 
-  return { links, loading, addLink, error };
+  const removeLink = (id) => {
+    setLinks(links.filter((link) => link.id !== id));
+  };
+
+  return { links, loading, addLink, removeLink, error };
 };
