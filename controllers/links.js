@@ -16,7 +16,7 @@ const newLinkController = async (req, res, next) => {
         //VALIDACION CON JOI
         const schema = Joi.object().keys({
             title: Joi.string().min(4).max(100).required(),
-            url: Joi.string().required(),
+            url: Joi.string().uri().required(),
             description: Joi.string().min(5).max(500).required(),
         });
 
@@ -48,6 +48,7 @@ const newLinkController = async (req, res, next) => {
 };
 
 const getLinksController = async (req, res, next) => {
+    console.log('usuario:', req.userId);
     try {
         const links = await getAllLinks();
 
@@ -83,22 +84,27 @@ const getSingleLinkController = async (req, res, next) => {
 };
 
 const deleteLinkController = async (req, res, next) => {
+    console.log(req.userId);
+
     try {
+        console.log('usuario:', req.userId);
         //req.userId
         const { id } = req.params;
 
         // Conseguir la información del enlace que quiero borrar
         const link = await getLinkById(id);
 
-        // Comprobar que el usuario del token es el mismo que creó el enlace
-        if (req.userId !== link.id_user) {
-            throw generateError(
-                'Estás intentando borrar un enlace que no es tuyo',
-                401
-            );
-        }
+        // // Comprobar que el usuario del token es el mismo que creó el enlace
+        // if (req.userId !== link.id_user) {
+        //     throw generateError(
+        //         'Estás intentando borrar un enlace que no es tuyo',
+        //         401
+        //     );
+        // }
 
         // Borrar el enlace
+        console.log(id);
+        console.log(req.params);
         await deleteLinkById(id);
 
         res.send({
@@ -106,6 +112,7 @@ const deleteLinkController = async (req, res, next) => {
             message: `El link con id: ${id} fue borrado`,
         });
     } catch (error) {
+        console.log('usuario:', req.userId);
         next(error);
     }
 };
