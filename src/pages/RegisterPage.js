@@ -1,6 +1,9 @@
+import "../css/registerPage.css";
 import { useState } from "react";
+import logo from "../images/Social-Link.png";
+import register from "../images/registerPage.png";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUserService } from "../services/userServices";
+import { registerUserService } from "../services";
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
@@ -34,62 +37,87 @@ export const RegisterPage = () => {
     }
   };
   return (
-    <section>
-      <h2>Página de Registro</h2>
-      <form onSubmit={handleForm}>
-        <fieldset>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </fieldset>{" "}
-        <fieldset>
-          <label htmlFor="name">NickName</label>
-          <input
-            type="name"
-            id="name"
-            name="name"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-          />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="pass1">Contraseña</label>
-          <input
-            type="password"
-            id="pass1"
-            name="pass1"
-            value={pass1}
-            required
-            onChange={(e) => setPass1(e.target.value)}
-          />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="pass2">Confirmar Contraseña</label>
-          <input
-            type="password"
-            id="pass2"
-            name="pass2"
-            value={pass2}
-            onChange={(e) => setPass2(e.target.value)}
-          />
-        </fieldset>
-        <button>Regístrate</button>
-        {error && <p>{error}</p>}
-        {success && (
-          <p>
-            Te has registrado con éxito!<Link to="/login">Ir a Login</Link>
-          </p>
-        )}
-        <p>
-          ¿Ya estás registrado? <Link to="/login">haz login aquí</Link>
+    <section className="registroGlobal">
+      <article className="registroFormulario">
+        <img className="logoRegistro" src={logo}></img>
+        <p className="mensajeBienvenidaRegistro">
+          Registrate para conseguir los mejores Links
         </p>
-      </form>
+        <form className="formularioRegistro" onSubmit={handleForm}>
+          <fieldset>
+            <label htmlFor="email"></label>
+            <input
+              className="formulario"
+              placeholder="Correo Electronico"
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="name"></label>
+            <input
+              className="formulario"
+              placeholder="Nombre de Usuario"
+              type="name"
+              id="name"
+              name="name"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="pass1"></label>
+            <input
+              className="formulario"
+              placeholder="Contraseña"
+              type="password"
+              id="pass1"
+              name="pass1"
+              value={pass1}
+              required
+              onChange={(e) => setPass1(e.target.value)}
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="pass2"></label>
+            <input
+              className="formulario"
+              placeholder="Confirmar Contraseña"
+              type="password"
+              id="pass2"
+              name="pass2"
+              value={pass2}
+              onChange={(e) => setPass2(e.target.value)}
+            />
+          </fieldset>
+          <p className="condicionesDePrivacidad">
+            Al registrarte, aceptas nuestras Condiciones. Obtén más información
+            sobre cómo recopilamos, usamos y compartimos tu información en la
+            política de privacidad, asi como el uso que hacemos de las cookies y
+            tecnologias similares en nuestras Políticas de cookies.
+          </p>
+          <button className="registrarse">Regístrate</button>
+          {error ? <p>{error}</p> : null}
+          {success && (
+            <p>
+              Te has registrado con éxito!<Link to="/login">Ir a Login</Link>
+            </p>
+          )}
+          <p className="siTengoCuenta">
+            ¿Ya estás registrado?{" "}
+            <Link className="login" to={"/login"}>
+              Inicia sesión aquí
+            </Link>
+          </p>
+        </form>
+      </article>
+      <article className="registerPage">
+        <img src={register}></img>
+      </article>
     </section>
   );
 };
