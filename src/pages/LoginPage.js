@@ -4,7 +4,7 @@ import homePage from "../images/homePage.png";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { loginUserService } from "../services";
+import { loginUserService } from "../services/userServices";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
