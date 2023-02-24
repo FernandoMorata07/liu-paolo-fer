@@ -15,6 +15,8 @@ const editUser = require('./controllers/editUser');
 const editUserPass = require('./controllers/editUserPass');
 const addVotes = require('./controllers/addVotes');
 
+const deleteUser = require('./controllers/deleteUser');
+
 const {
     getLinksController,
     newLinkController,
@@ -39,12 +41,14 @@ app.get('/user', authUser, getMeController);
 app.put('/user/edit', editUser);
 // Modificar la contraseña del usuario
 app.put('/users/password', editUserPass);
+// Eliminar un usuario
+app.delete('/users', authUser, deleteUser);
 
 //Rutas de Links
 app.post('/', authUser, newLinkController);
 app.get('/', getLinksController);
 app.get('/link/:id', getSingleLinkController);
-app.delete('/link/:id', deleteLinkController);
+app.delete('/link/:id', authUser, deleteLinkController);
 
 //Rutas de votos
 // Votar un enlace
