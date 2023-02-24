@@ -1,10 +1,14 @@
+import "../css/legalNotice.css";
+import legalNotice from "../images/legalNotice.png";
 import React from "react";
 
 export function LegalNotice() {
   return (
-    <section>
-      <h2>Información relativa al cumplimiento del artículo 10 de la LSSICE</h2>
-      <p>
+    <section className="legalNoticeGlobal">
+      <h2 className="legalNoticeTitulo">
+        Información relativa al cumplimiento del artículo 10 de la LSSICE
+      </h2>
+      <p className="legalNoticeP">
         En nombre del responsable tratamos la información que nos facilita con
         el fin de enviarle publicidad relacionada con nuestros productos y
         servicios por cualquier medio (postal, email o teléfono). Los datos
@@ -16,6 +20,7 @@ export function LegalNotice() {
         inexacto o solicitar su supresión cuando los datos ya no sean necesarios
         para los fines que fueron recogidos.
       </p>
+      <img className="legalNoticePng" src={legalNotice}></img>
     </section>
   );
 }
