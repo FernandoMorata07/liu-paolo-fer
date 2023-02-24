@@ -10,6 +10,7 @@ sale undefined y de consecuencia no funciona.
 - implementado componente votar (pero no vota correctamente)
 - Actualizada pagina de userEdit - FALTA IMPLEMENTAR PARA ADD BIOGRAFIA, MOSTRAR LOS LINKS DE LOS USUARIOS E MOSTRAR DATOS DE OTROS USUARIOS QUE NO SEAN 
 SOLO LOS QUE ESTAN LOGEADOS
+- Refactorizado el archivo ./services/index.js que ya no existe. Los services están divididos en userServices y linksServices.
 
 -Actualizada pagina de editUser - APARENTEMENTE FUNCIONA PERO NO ACTUALIZA LOS DATOS
 -Actualizada pagina de editPass - DA ERROR AL INTENTAR ACTUALIZAR LA CONTRASEÑA - FALTA PONER PARA QUE EL USUARIO INTRODUZCA LA CONTRASEÑA ACTUAL
