@@ -1,72 +1,78 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUserService } from "../services";
+import { registerUserService, editPassService } from "../services/userServices";
+import { AuthContext } from "../context/AuthContext";
 
 export const EditPasswordPage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const [pass1, setPass1] = useState("");
-  // const [pass2, setPass2] = useState("");
-  // const [success, setSuccess] = useState(false);
+  const [newPass, setNewPass] = useState("");
+  const [confirmNewPass, setConfirmNewPass] = useState("");
+  const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
 
-  // const [error, setError] = useState("");
+  const handleForm = async (e) => {
+    e.preventDefault();
 
-  // const handleForm = async (e) => {
-  //   e.preventDefault();
+    // try {
+    //   const data = await loginUserService({ password });
 
-  //   if (pass1 !== pass2) {
-  //     setError("Las contraseñas no coinciden");
-  //     return;
-  //   }
-  //   try {
-  //     await registerUserService({ email, password: pass1, nombre });
+    //   logIn(data);
+    //   navigate("/");
+    // } catch (error) {
+    //   setError(error.message);
+    // }
 
-  //     setSuccess(true);
-  //     setNombre("");
-  //     setEmail("");
-  //     setPass1("");
-  //     setPass2("");
-  //     setError("");
-  //   } catch (error) {
-  //     setError(error.message);
-  //   }
-  // };
+    try {
+      await editPassService({ newPass, confirmNewPass });
+
+      setSuccess(true);
+      setNewPass("");
+      setConfirmNewPass("");
+      setError("");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <section>
       <h2>Editar contraseña</h2>
-      {/* <form onSubmit={handleForm}>
-        <fieldset>
-          <label htmlFor="pass1">Contraseña actual</label>
+      <form onSubmit={handleForm}>
+        {/* <fieldset>
+          <label htmlFor="password">Contraseña actual </label>
           <input
             type="password"
-            id="pass"
-            name="pass"
-            value={pass1}
+            id="password"
+            name="password"
             required
-            onChange={(e) => setPass1(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
-        </fieldset>
+        </fieldset> */}
         <fieldset>
-          <label htmlFor="pass1">Nueva contraseña</label>
+          <label htmlFor="pass1">Contraseña nueva</label>
           <input
             type="password"
-            id="pass1"
-            name="pass1"
-            value={pass1}
+            id="newPass"
+            name="newPass"
+            value={newPass}
             required
-            onChange={(e) => setPass1(e.target.value)}
+            onChange={(e) => setNewPass(e.target.value)}
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="pass2">Confirmar nueva contraseña</label>
+          <label htmlFor="pass1">Confirmar la nueva contraseña</label>
           <input
             type="password"
-            id="pass2"
-            name="pass2"
-            value={pass2}
-            onChange={(e) => setPass2(e.target.value)}
+            id="confirmNewPass"
+            name="confirmNewPass"
+            value={confirmNewPass}
+            required
+            onChange={(e) => setConfirmNewPass(e.target.value)}
           />
         </fieldset>
+
         <button>Actualizar</button>
         {error ? <p>{error}</p> : null}
         {success && (
@@ -77,7 +83,7 @@ export const EditPasswordPage = () => {
         <p>
           ¿Ya estás registrado? <Link to="/login">haz login aquí</Link>
         </p>
-      </form> */}
+      </form>
     </section>
   );
 };

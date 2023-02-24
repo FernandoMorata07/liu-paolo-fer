@@ -16,6 +16,7 @@ import { useContext } from "react";
 import { EditUserPage } from "./pages/EditUserPage";
 import { EditPasswordPage } from "./pages/EditPasswordPage";
 import { AuthContext } from "./context/AuthContext";
+import { ErrorLoginRegisterPage } from "./pages/ErrorLoginRegisterPage";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -24,8 +25,14 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={user ? <HomePage /> : <LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/register"
+          element={user ? <ErrorLoginRegisterPage /> : <RegisterPage />}
+        />
+        <Route
+          path="/login"
+          element={user ? <ErrorLoginRegisterPage /> : <LoginPage />}
+        />
         <Route path="/link/:id" element={<LinkPage />} />
         <Route path="/user/:id" element={<UserPage />} />
         <Route path="/legal-notice" element={<LegalNotice />} />

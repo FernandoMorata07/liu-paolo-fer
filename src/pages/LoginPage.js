@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { loginUserService } from "../services";
+import { loginUserService } from "../services/userServices";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -50,7 +50,7 @@ export const LoginPage = () => {
         </fieldset>
 
         <button>LogIn</button>
-        {error ? <p>{error}</p> : null}
+        {error && <p>{error}</p>}
 
         <p>
           Si no estás registrado...¿a qué esperas?{" "}

@@ -6,25 +6,14 @@ import useUser from "../hooks/useUser";
 
 export const UserPage = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
-  const { id } = useParams();
-  console.log(user);
-  console.log(id);
-  // console.log(user.id);
-
-  // const { token } = useContext(AuthContext);
-  // const { user, loading, error } = useUser(id);
-  // if (loading) return <p>Cargando datos del usuario...</p>;
-  // if (error) return <ErrorMessage message={error} />;
 
   return (
     <>
       <section>
-        <h2>Página de perfil de {"user.nombre"}</h2>
-        <p>Usuario de id: {"user.id"}</p>
-        <p>Email: {"user.email"}</p>
-        <p>NickName: {"user.nombre"}</p>
-        <p>Biografia: {"user.biography"}</p>
+        <h2>Página de perfil de: {user.nombre}</h2>
+        <p>Id de usuario: {user.id}</p>
+        <p>Email: {user.email}</p>
+        <p>Biografia: {user.biography}</p>
       </section>
       <section>
         <button>

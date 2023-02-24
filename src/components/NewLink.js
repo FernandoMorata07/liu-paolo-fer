@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 
 import { AuthContext } from "../context/AuthContext";
-import { sendLinkService } from "../services";
+import { sendLinkService } from "../services/linksServices";
 
 export const NewLink = ({ addLink }) => {
   const [error, setError] = useState("");

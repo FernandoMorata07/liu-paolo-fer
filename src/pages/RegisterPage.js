@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUserService } from "../services";
+import { registerUserService } from "../services/userServices";
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ export const RegisterPage = () => {
           />
         </fieldset>
         <button>Regístrate</button>
-        {error ? <p>{error}</p> : null}
+        {error && <p>{error}</p>}
         {success && (
           <p>
             Te has registrado con éxito!<Link to="/login">Ir a Login</Link>

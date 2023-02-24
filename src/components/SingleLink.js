@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { useState } from "react";
-import { deleteLinkService } from "../services";
+import { deleteLinkService } from "../services/linksServices";
+import { VotarLink } from "./VotarLink";
 
 export const SingleLink = ({ link, removeLink }) => {
   const navigate = useNavigate();
@@ -26,8 +26,6 @@ export const SingleLink = ({ link, removeLink }) => {
     }
   };
 
-  console.log(link);
-  console.log(user);
   return (
     <article>
       <Link to={`/link/${link.id}`}>
@@ -38,15 +36,25 @@ export const SingleLink = ({ link, removeLink }) => {
       </a>
 
       <p>
-        Postado por: <Link to={`/user/${link.id_user}`}>"{link.userName}"</Link>{" "}
-        en:
+        Posteado por:{" "}
+        <Link to={`/user/${link.id_user}`}>"{link.userName}"</Link> en:
         {` ${new Date(link.createdLink).toLocaleString()}`}
       </p>
       {link.avgVotos ? (
-        <p>Esa publicación tiene una media de votos de {link.avgVotos}.</p>
+        <p>
+          Esta publicación tiene una media de votos de {parseInt(link.avgVotos)}{" "}
+          estrellas.
+        </p>
       ) : (
-        <p>Esa publicación no ha sido votada todavía.</p>
+        <p>Esta publicación aún no fue votada.</p>
       )}
+      {/* Componente de votos representado con estrellas */}
+      {user.id !== link.id_user && (
+        <>
+          <VotarLink />
+        </>
+      )}
+      {/* Botón de borrar link*/}
       {user && user.id === link.id_user && (
         <>
           <button

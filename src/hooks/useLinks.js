@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllLinksServices } from "../services";
+import { getAllLinksServices } from "../services/linksServices";
 
 export const useLinks = () => {
   const [links, setLinks] = useState([]);
@@ -31,6 +31,10 @@ export const useLinks = () => {
   const removeLink = (id) => {
     setLinks(links.filter((link) => link.id !== id));
   };
+
+  // const votoLink = (idLink) => {
+  //   setLinks()
+  // }
 
   return { links, loading, addLink, removeLink, error };
 };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSingleLinkService } from "../services";
+import { getSingleLinkService } from "../services/linksServices";
 
 export const useLink = (id) => {
   const [link, setLink] = useState(null);
