@@ -16,6 +16,7 @@ SOLO LOS QUE ESTAN LOGEADOS
 -Actualizada pagina de editPass - DA ERROR AL INTENTAR ACTUALIZAR LA CONTRASEÑA - FALTA PONER PARA QUE EL USUARIO INTRODUZCA LA CONTRASEÑA ACTUAL
 
 - Implementada página de error (ErrorLoginRegisterPage.js) en caso un usuario ya logeado intente registrarse o iniciar sesión (estando la sesion activa).
+- Tentativa de implementar "toast alerts" de react-toastify en ./components/SingleLink.js pero sin éxito.
 
 COSAS PENDIENTES AL DÍA DE HOY:
 
