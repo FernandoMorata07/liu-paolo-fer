@@ -25,3 +25,10 @@ COSAS PENDIENTES AL DÍA DE HOY:
 3. editUser
 4. editPass
 5. Filtros por fecha
+6. SERIA MUY IMPORTANTE IMPLEMENTAR UN DELETE USER
+(NO HAY END POINT EN EL BACK PARA ESO). Pero yo lo 
+Veo mucho más necesario eso que poner filtros o poner
+Avatar o biografia de usuario.
+
+Por lo menos, yo, como usuario no me inscribiría
+En una página donde no pueda darme de baja.
