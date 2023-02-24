@@ -1,7 +1,10 @@
+import "../css/loginPage.css";
+import logo from "../images/Social-Link.png";
+import homePage from "../images/homePage.png";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { loginUserService } from "../services/userServices";
+import { loginUserService } from "../services";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -25,38 +28,50 @@ export const LoginPage = () => {
   };
 
   return (
-    <section>
-      <h2>Página de Login</h2>
-      <form onSubmit={handleForm}>
-        <fieldset>
-          <label htmlFor="email">Email </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="password">Contraseña </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </fieldset>
+    <>
+      <section className="global">
+        <img className="homePage" src={homePage}></img>
+        <section className="estructuraFormulario">
+          <img className="logo" src={logo}></img>
+          <form onSubmit={handleForm}>
+            <fieldset>
+              <label htmlFor="email"></label>
+              <input
+                className="formulario"
+                placeholder="Correo Electronico"
+                type="email"
+                id="email"
+                name="email"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="password"></label>
+              <input
+                className="formulario"
+                placeholder="Contraseña"
+                type="password"
+                id="password"
+                name="password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </fieldset>
 
-        <button>LogIn</button>
-        {error && <p>{error}</p>}
+            <button className="inicioSesion">Iniciar Sesión</button>
+            {error ? <p>{error}</p> : null}
 
-        <p>
-          Si no estás registrado...¿a qué esperas?{" "}
-          <Link to={"/register"}>Regístrate</Link>
-        </p>
-      </form>
-    </section>
+            <p className="noTengoCuenta">
+              ¿No tienes una cuenta?
+              <Link className="registro" to={"/register"}>
+                {" "}
+                Registrate{" "}
+              </Link>
+            </p>
+          </form>
+        </section>
+      </section>
+    </>
   );
 };
