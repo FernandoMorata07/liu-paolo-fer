@@ -97,8 +97,8 @@ export const VotarLink = () => {
       <label htmlFor="voto5">★</label>
 
       <button>Votar link</button>
-      {sending ? <p>Votando link</p> : null}
-      {error ? <p>{error}</p> : null}
+      {sending && <p>Votando link</p>}
+      {error && <p>{error}</p>}
     </form>
   );
 };
