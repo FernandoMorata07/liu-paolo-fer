@@ -22,7 +22,6 @@ export const UserPage = () => {
         <button>
           <Link to="/edit-pass">Cambiar Contraseña</Link>
         </button>
-        </button>
         <button>Eliminar mi cuenta de usuario</button>
       </section>
     </>
