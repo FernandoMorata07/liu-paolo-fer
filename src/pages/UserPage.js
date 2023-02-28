@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useParams } from "react-router-dom";
 import { ErrorMessage } from "../components/ErrorMessage";
 import useUser from "../hooks/useUser";
+import { DeleteUsercomponent } from "../components/DeleteUser";
+import { deleteUserService } from "../services/userServices";
+import { LinksList } from "../components/LinksList";
+import { LinksUser } from "../components/LinksUser";
 
 export const UserPage = () => {
   const { user } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const { token } = useContext(AuthContext);
 
   return (
     <>
@@ -22,8 +28,24 @@ export const UserPage = () => {
         <button>
           <Link to="/edit-pass">Cambiar Contraseña</Link>
         </button>
+
+        <button
+          onClick={async () => {
+            try {
+              const res = await deleteUserService();
+
+              const json = await res.json();
+
+              if (!res.ok) {
+                throw new Error(json.message);
+              }
+            } catch (error) {
+              setError(error.message);
+            }
+          }}
+        >
+          borra usuario
         </button>
-        <button>Eliminar mi cuenta de usuario</button>
       </section>
     </>
   );

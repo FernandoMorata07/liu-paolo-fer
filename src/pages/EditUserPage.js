@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import { editUserService } from "../services/userServices";
 
 export const EditUserPage = () => {
-  const navigate = useNavigate();
-
+  const { token } = useContext(AuthContext);
   const [newName, setNewName] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [success, setSuccess] = useState(false);
@@ -15,7 +15,7 @@ export const EditUserPage = () => {
     e.preventDefault();
 
     try {
-      await editUserService({ newEmail, newName });
+      await editUserService({ newEmail, newName, token });
 
       setSuccess(true);
       setNewName("");

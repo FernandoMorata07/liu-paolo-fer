@@ -22,7 +22,7 @@ function App() {
   const { user } = useContext(AuthContext);
   return (
     <main className="App">
-      <Header />
+      {user ? <Header /> : null}
       <Routes>
         <Route path="/" element={user ? <HomePage /> : <LoginPage />} />
         <Route

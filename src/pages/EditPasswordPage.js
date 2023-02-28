@@ -1,16 +1,15 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUserService, editPassService } from "../services/userServices";
+import { editPassService } from "../services/userServices";
 import { AuthContext } from "../context/AuthContext";
 
 export const EditPasswordPage = () => {
-  const navigate = useNavigate();
-
   const [newPass, setNewPass] = useState("");
   const [confirmNewPass, setConfirmNewPass] = useState("");
   const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
+
   const [success, setSuccess] = useState(false);
+  const { token } = useContext(AuthContext);
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -25,7 +24,7 @@ export const EditPasswordPage = () => {
     // }
 
     try {
-      await editPassService({ newPass, confirmNewPass });
+      await editPassService({ newPass, confirmNewPass, token });
 
       setSuccess(true);
       setNewPass("");
@@ -51,7 +50,7 @@ export const EditPasswordPage = () => {
           />
         </fieldset> */}
         <fieldset>
-          <label htmlFor="pass1">Contraseña nueva</label>
+          <label htmlFor="newPass">Contraseña nueva</label>
           <input
             type="password"
             id="newPass"
@@ -62,7 +61,7 @@ export const EditPasswordPage = () => {
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="pass1">Confirmar la nueva contraseña</label>
+          <label htmlFor="confirmNewPass">Confirmar la nueva contraseña</label>
           <input
             type="password"
             id="confirmNewPass"
@@ -77,12 +76,9 @@ export const EditPasswordPage = () => {
         {error ? <p>{error}</p> : null}
         {success && (
           <p>
-            Te has registrado con éxito!<Link to="/login">Ir a Login</Link>
+            Contraseña actualizada con exito<Link to="/login">Ir a Login</Link>
           </p>
         )}
-        <p>
-          ¿Ya estás registrado? <Link to="/login">haz login aquí</Link>
-        </p>
       </form>
     </section>
   );

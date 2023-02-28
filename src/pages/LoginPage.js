@@ -30,7 +30,7 @@ export const LoginPage = () => {
   return (
     <>
       <section className="global">
-        <img className="homePage" src={homePage}></img>
+        <img className="homePage" to={"/"} src={homePage}></img>
         <section className="estructuraFormulario">
           <img className="logo" src={logo}></img>
           <form onSubmit={handleForm}>

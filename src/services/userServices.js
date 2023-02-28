@@ -56,10 +56,11 @@ export const registerUserService = async ({ email, password, nombre }) => {
   }
 };
 
-export const editUserService = async ({ newEmail, newName }) => {
+export const editUserService = async ({ newEmail, newName, token }) => {
   const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/edit`, {
     method: "PUT",
     headers: {
+      Authorization: token,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ newEmail, newName }),
@@ -72,13 +73,37 @@ export const editUserService = async ({ newEmail, newName }) => {
   }
 };
 
-export const editPassService = async ({ newPass, confirmNewPass }) => {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/edit`, {
-    method: "PUT",
+
+
+export const editPassService = async ({ newPass, confirmNewPass, token }) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_BACKEND}/users/password`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newPass, confirmNewPass }),
+    }
+  );
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.message);
+  }
+};
+
+
+export const deleteUserService = async ({ password, token }) => {
+  const response = await fetch(`${process.env.REACT_APP_BACKEND}/users`, {
+    method: "DELETE",
     headers: {
+      Authorization: token,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ newPass, confirmNewPass }),
+    body: JSON.stringify({ password }),
   });
 
   const json = await response.json();

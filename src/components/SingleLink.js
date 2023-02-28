@@ -7,7 +7,7 @@ import { VotarLink } from "./VotarLink";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const SingleLink = ({ link, removeLink }) => {
+export const SingleLink = ({ link, removeLink, addVoteToLink }) => {
   const navigate = useNavigate();
   const { user, token } = useContext(AuthContext);
   const [error, setError] = useState("");
@@ -56,7 +56,11 @@ export const SingleLink = ({ link, removeLink }) => {
       {/* Componente de votos representado con estrellas */}
       {user.id !== link.id_user && (
         <>
-          <VotarLink />
+          <VotarLink
+            idLink={link.id}
+            loggedUserVote={link.loggedUserVote}
+            addVoteToLink={addVoteToLink}
+          />
         </>
       )}
       {/* Botón de borrar link*/}

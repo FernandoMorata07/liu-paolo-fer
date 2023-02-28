@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { getAllLinksServices } from "../services/linksServices";
 
 export const useLinks = () => {
   const [links, setLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     const loadLinks = async () => {
       try {
         setLoading(true);
 
-        const data = await getAllLinksServices();
-
+        const data = await getAllLinksServices(token);
+        console.log(data);
         setLinks(data);
       } catch (error) {
         setError(error.message);
@@ -22,7 +24,7 @@ export const useLinks = () => {
     };
 
     loadLinks();
-  }, []);
+  }, [token]);
 
   const addLink = (newLink) => {
     setLinks([newLink, ...links]);
@@ -32,9 +34,24 @@ export const useLinks = () => {
     setLinks(links.filter((link) => link.id !== id));
   };
 
-  // const votoLink = (idLink) => {
-  //   setLinks()
-  // }
+  const verLinkUser = (id) => {
+    setLinks(links.filter((link) => link.id === id));
+  };
 
-  return { links, loading, addLink, removeLink, error };
+  const addVoteToLink = ({ id, vote, newAvgVotos }) => {
+    const index = links.findIndex((link) => link.id === id);
+    links[index].avgVotos = newAvgVotos;
+    links[index].loggedUserVote = vote;
+    setLinks([...links]);
+  };
+
+  return {
+    links,
+    loading,
+    addLink,
+    removeLink,
+    addVoteToLink,
+    verLinkUser,
+    error,
+  };
 };

@@ -1,5 +1,9 @@
-export const getAllLinksServices = async () => {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND}`);
+export const getAllLinksServices = async (token) => {
+  const response = await fetch(`${process.env.REACT_APP_BACKEND}`, {
+    headers: {
+      Authorization: token,
+    },
+  });
 
   const json = await response.json();
 
@@ -51,15 +55,18 @@ export const deleteLinkService = async ({ id, token }) => {
   return json.data;
 };
 
-export const votarLinkService = async ({ idLink, data, token }) => {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND}/votos/5`, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-  });
+export const votarLinkService = async ({ idLink, voto, token }) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_BACKEND}/votos/${idLink}`,
+    {
+      method: "POST",
+      body: JSON.stringify({ voto }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    }
+  );
 
   const json = await response.json();
   if (!response.ok) {

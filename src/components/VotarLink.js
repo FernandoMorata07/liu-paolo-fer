@@ -2,19 +2,28 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { votarLinkService } from "../services/linksServices";
 
-export const VotarLink = () => {
+export const VotarLink = ({ idLink, loggedUserVote, addVoteToLink }) => {
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const { token } = useContext(AuthContext);
-  const [voto, setVoto] = useState("");
-
-  const handleForm = async (e) => {
-    e.preventDefault();
-
-    setError("");
+  console.log(loggedUserVote);
+  const handleChange = async (e) => {
+    console.log(e.target.value);
     try {
-      await votarLinkService({ voto, token });
-      console.log(voto);
+      if (loggedUserVote) {
+        return;
+      }
+      const { avgVotos } = await votarLinkService({
+        voto: +e.target.value,
+        token,
+        idLink,
+      });
+
+      addVoteToLink({
+        id: idLink,
+        newAvgVotos: avgVotos,
+        vote: +e.target.value,
+      });
     } catch (error) {
       setError(error.message);
     } finally {
@@ -42,61 +51,65 @@ export const VotarLink = () => {
   // };
 
   return (
-    <form onSubmit={handleForm} className="clasificacion">
+    <form className="clasificacion">
       {/* <label htmlFor="voto"></label>
       <input
         id="voto"
         type="text"
         name="voto"
-        onChange={(e) => setVoto(e.target.value)}
+        onChange={handleChange}
         required
       /> */}
       <input
-        id="voto1"
-        type="radio"
-        name="voto"
-        value="1"
-        onChange={(e) => setVoto(e.target.value)}
-      />
-      <label htmlFor="voto1">★</label>
-
-      <input
-        id="voto2"
-        type="radio"
-        name="voto"
-        value="2"
-        onChange={(e) => setVoto(e.target.value)}
-      />
-      <label htmlFor="voto2">★</label>
-
-      <input
-        id="voto3"
-        type="radio"
-        name="voto"
-        value="3"
-        onChange={(e) => setVoto(e.target.value)}
-      />
-      <label htmlFor="voto3">★</label>
-
-      <input
-        id="voto4"
-        type="radio"
-        name="voto"
-        value="4"
-        onChange={(e) => setVoto(e.target.value)}
-      />
-      <label htmlFor="voto4">★</label>
-
-      <input
-        id="voto5"
+        id={`link-${idLink}voto5`}
         type="radio"
         name="voto"
         value="5"
-        onChange={(e) => setVoto(e.target.value)}
+        checked={loggedUserVote === 5}
+        onChange={handleChange}
       />
-      <label htmlFor="voto5">★</label>
+      <label htmlFor={`link-${idLink}voto5`}>★</label>
 
-      <button>Votar link</button>
+      <input
+        id={`link-${idLink}voto4`}
+        type="radio"
+        name="voto"
+        value="4"
+        checked={loggedUserVote === 4}
+        onChange={handleChange}
+      />
+      <label htmlFor={`link-${idLink}voto4`}>★</label>
+
+      <input
+        id={`link-${idLink}voto3`}
+        type="radio"
+        name="voto"
+        value="3"
+        checked={loggedUserVote === 3}
+        onChange={handleChange}
+      />
+      <label htmlFor={`link-${idLink}voto3`}>★</label>
+
+      <input
+        id={`link-${idLink}voto2`}
+        type="radio"
+        name="voto"
+        value="2"
+        checked={loggedUserVote === 2}
+        onChange={handleChange}
+      />
+      <label htmlFor={`link-${idLink}voto2`}>★</label>
+
+      <input
+        id={`link-${idLink}voto1`}
+        type="radio"
+        name="voto"
+        value="1"
+        checked={loggedUserVote === 1}
+        onChange={handleChange}
+      />
+      <label htmlFor={`link-${idLink}voto1`}>★</label>
+
       {sending && <p>Votando link</p>}
       {error && <p>{error}</p>}
     </form>
