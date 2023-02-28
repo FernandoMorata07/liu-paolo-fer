@@ -17,9 +17,10 @@ import { EditUserPage } from "./pages/EditUserPage";
 import { EditPasswordPage } from "./pages/EditPasswordPage";
 import { AuthContext } from "./context/AuthContext";
 import { ErrorLoginRegisterPage } from "./pages/ErrorLoginRegisterPage";
+import { UsersPage } from "./pages/UsersPage";
 
 function App() {
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
   return (
     <main className="App">
       {user ? <Header /> : null}
@@ -34,7 +35,8 @@ function App() {
           element={user ? <ErrorLoginRegisterPage /> : <LoginPage />}
         />
         <Route path="/link/:id" element={<LinkPage />} />
-        <Route path="/user/:id" element={<UserPage />} />
+        <Route path="/user" element={<UserPage />} />
+        <Route path="/user/:id" element={<UsersPage />} />
         <Route path="/legal-notice" element={<LegalNotice />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/edit-user" element={<EditUserPage />} />

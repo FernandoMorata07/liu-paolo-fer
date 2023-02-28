@@ -4,11 +4,12 @@ import { deleteUserService } from "../services/userServices";
 
 export const DeleteUsercomponent = () => {
   const { token } = useContext(AuthContext);
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
   const Deleteuser = async ({ password, token }) => {
     try {
-      await deleteUserService({ password, token });
+      const data = await deleteUserService({ password, token });
     } catch (error) {
       setError(error.message);
     }

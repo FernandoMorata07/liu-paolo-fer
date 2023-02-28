@@ -41,7 +41,7 @@ export const SingleLink = ({ link, removeLink, addVoteToLink }) => {
       </a>
 
       <p>
-        Posteado por:{" "}
+        Posteado por:
         <Link to={`/user/${link.id_user}`}>"{link.userName}"</Link> en:
         {` ${new Date(link.createdLink).toLocaleString()}`}
       </p>

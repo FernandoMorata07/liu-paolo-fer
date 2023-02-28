@@ -2,12 +2,10 @@ import "../css/registerPage.css";
 import { useState } from "react";
 import logo from "../images/Social-Link.png";
 import register from "../images/registerPage.png";
-import { Link, useNavigate } from "react-router-dom";
-import { registerUserService } from "../services";
+import { Link } from "react-router-dom";
+import { registerUserService } from "../services/userServices";
 
 export const RegisterPage = () => {
-  const navigate = useNavigate();
-
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [pass1, setPass1] = useState("");

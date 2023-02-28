@@ -73,8 +73,6 @@ export const editUserService = async ({ newEmail, newName, token }) => {
   }
 };
 
-
-
 export const editPassService = async ({ newPass, confirmNewPass, token }) => {
   const response = await fetch(
     `${process.env.REACT_APP_BACKEND}/users/password`,
@@ -94,7 +92,6 @@ export const editPassService = async ({ newPass, confirmNewPass, token }) => {
     throw new Error(json.message);
   }
 };
-
 
 export const deleteUserService = async ({ password, token }) => {
   const response = await fetch(`${process.env.REACT_APP_BACKEND}/users`, {
