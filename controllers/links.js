@@ -47,7 +47,7 @@ const newLinkController = async (req, res, next) => {
 
 const getLinksController = async (req, res, next) => {
     try {
-        const links = await getAllLinks();
+        const links = await getAllLinks(req.userId);
 
         res.send({
             status: 'ok',

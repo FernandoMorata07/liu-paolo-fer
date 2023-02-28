@@ -38,15 +38,15 @@ app.get('/user/:id', authUser, getUserController);
 app.post('/login', loginController);
 app.get('/user', authUser, getMeController);
 // Modificar email o username
-app.put('/user/edit', editUser);
+app.put('/user/edit', authUser, editUser);
 // Modificar la contraseña del usuario
-app.put('/users/password', editUserPass);
+app.put('/users/password', authUser, editUserPass);
 // Eliminar un usuario
 app.delete('/users', authUser, deleteUser);
 
 //Rutas de Links
 app.post('/', authUser, newLinkController);
-app.get('/', getLinksController);
+app.get('/', authUser, getLinksController);
 app.get('/link/:id', getSingleLinkController);
 app.delete('/link/:id', authUser, deleteLinkController);
 

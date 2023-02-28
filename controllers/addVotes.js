@@ -61,7 +61,13 @@ const addVotes = async (req, res, next) => {
             [idAuthUser, idLink, voto]
         );
 
+        const [[{ avgVotos }]] = await connection.query(
+            ` SELECT AVG(v.voto) avgVotos FROM links l LEFT JOIN votos v ON l.id = v.id_links WHERE l.id = ?`,
+            [idLink]
+        );
+
         res.send({
+            data: { avgVotos },
             status: 'Ok',
             message: `¡Tu voto ha sido registrado!`,
         });

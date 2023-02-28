@@ -18,15 +18,18 @@ const insertLink = async (link) => {
     }
 };
 
-const getAllLinks = async () => {
+const getAllLinks = async (loggedUserId) => {
     let connection;
 
     try {
         connection = await getConnection();
 
-        const [result] = await connection.query(`
-        SELECT u.nombre userName, l.*, AVG(v.voto) avgVotos FROM links l LEFT JOIN votos v ON l.id = v.id_links LEFT JOIN users u ON l.id_user = u.id GROUP BY l.id  ORDER BY createdLink DESC
-      `);
+        const [result] = await connection.query(
+            `
+        SELECT u.nombre userName, l.*, AVG(v.voto) avgVotos, MAX(v2.voto) loggedUserVote FROM links l LEFT JOIN votos v ON l.id = v.id_links LEFT JOIN votos v2 ON (l.id = v2.id_links AND v2.id_users = ?) LEFT JOIN users u ON l.id_user = u.id GROUP BY l.id  ORDER BY createdLink DESC
+      `,
+            [loggedUserId]
+        );
 
         return result;
     } finally {
