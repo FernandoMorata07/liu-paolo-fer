@@ -1,11 +1,11 @@
-import "../css/homePage.css";
+import "../css/linkListPage.css";
 import { SingleLink } from "./SingleLink";
 
 export const LinksList = ({ links, removeLink, addVoteToLink }) => {
   return links.length ? (
-    <ul>
+    <ul className="linkListGlobal">
       {links.map((link) => (
-        <li key={link.id}>
+        <li className="linkListLi" key={link.id}>
           <SingleLink
             link={link}
             removeLink={removeLink}
