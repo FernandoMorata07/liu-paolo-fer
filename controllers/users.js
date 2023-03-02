@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { generateError } = require('../helpers');
 const { createUser, getUserById, getUserByEmail } = require('../db/users');
 const Joi = require('@hapi/joi');
+const { getLinksByUserId, getLinkById } = require('../db/links');
 
 const newUserController = async (req, res, next) => {
     try {
@@ -45,9 +46,11 @@ const getUserController = async (req, res, next) => {
 
         const user = await getUserById(id);
 
+        const links = await getLinksByUserId(id, req.userId);
+
         res.send({
             status: 'ok',
-            data: user,
+            data: { info: user, links },
         });
     } catch (error) {
         next(error);
@@ -110,10 +113,25 @@ const loginController = async (req, res, next) => {
         next(error);
     }
 };
+const getUserLinksController = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const user = await getLinksByUserId(id);
+
+        res.send({
+            status: 'ok',
+            data: user,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
 
 module.exports = {
     newUserController,
     getUserController,
     loginController,
     getMeController,
+    getUserLinksController,
 };

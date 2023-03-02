@@ -9,9 +9,11 @@ const {
     getUserController,
     loginController,
     getMeController,
+    getUserLinksController,
 } = require('./controllers/users');
 
 const editUser = require('./controllers/editUser');
+const editBio = require('./controllers/editBio');
 const editUserPass = require('./controllers/editUserPass');
 const addVotes = require('./controllers/addVotes');
 
@@ -36,7 +38,11 @@ app.use(morgan('dev'));
 app.post('/user', newUserController);
 app.get('/user/:id', authUser, getUserController);
 app.post('/login', loginController);
+//Modificar la biografia del usuario
+app.put('/user/bio', authUser, editBio);
+
 app.get('/user', authUser, getMeController);
+app.get('/user/:id/links', getUserLinksController);
 // Modificar email o username
 app.put('/user/edit', authUser, editUser);
 // Modificar la contraseña del usuario
@@ -47,7 +53,7 @@ app.delete('/users', authUser, deleteUser);
 //Rutas de Links
 app.post('/', authUser, newLinkController);
 app.get('/', authUser, getLinksController);
-app.get('/link/:id', getSingleLinkController);
+app.get('/link/:id', authUser, getSingleLinkController);
 app.delete('/link/:id', authUser, deleteLinkController);
 
 //Rutas de votos
