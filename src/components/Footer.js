@@ -3,17 +3,19 @@ import { Link } from "react-router-dom";
 export const Footer = () => {
   return (
     <footer>
-      <br />
-      <hr />
-      <ul>
+      <ul className="estructuraFooter">
         <li>
-          <Link to="/about-us">Sobre nosotros</Link>
+          <Link className="linkFooter" to="/about-us">
+            Sobre nosotros
+          </Link>
         </li>
         <li>
-          <Link to="/legal-notice">Aviso legal</Link>
+          <Link className="linkFooter" to="/legal-notice">
+            Aviso legal
+          </Link>
         </li>
-        <li>(c) 2023 Social Link</li>
       </ul>
+      <p>© Hack A Boss 2023</p>
     </footer>
   );
 };
