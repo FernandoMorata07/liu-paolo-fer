@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { getSingleLinkService } from "../services/linksServices";
 
 export const useLink = (id) => {
@@ -6,12 +7,14 @@ export const useLink = (id) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const { token } = useContext(AuthContext);
+
   useEffect(() => {
     const loadLink = async () => {
       try {
         setLoading(true);
 
-        const data = await getSingleLinkService(id);
+        const data = await getSingleLinkService(id, token);
 
         setLink(data);
       } catch (error) {
@@ -22,7 +25,7 @@ export const useLink = (id) => {
     };
 
     loadLink();
-  }, [id]);
+  }, [id, token]);
 
   return { link, loading, error };
 };

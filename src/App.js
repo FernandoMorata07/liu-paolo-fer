@@ -1,5 +1,7 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Header } from "./components/Headers";
 import { Footer } from "./components/Footer";
@@ -10,6 +12,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { LinkPage } from "./pages/LinkPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { UserPage } from "./pages/UserPage";
+import { UsersPage } from "./pages/UsersPage";
 import { LegalNotice } from "./pages/LegalNotice";
 import { AboutUs } from "./pages/AboutUs";
 import { useContext } from "react";
@@ -17,13 +20,15 @@ import { EditUserPage } from "./pages/EditUserPage";
 import { EditPasswordPage } from "./pages/EditPasswordPage";
 import { AuthContext } from "./context/AuthContext";
 import { ErrorLoginRegisterPage } from "./pages/ErrorLoginRegisterPage";
-import { UsersPage } from "./pages/UsersPage";
+import { DeleteUserPage } from "./pages/DeleteUserPage";
 
 function App() {
-  const { user, token } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
   return (
     <main className="App">
-      {user ? <Header /> : null}
+      {/* <ToastContainer> */}
+      {user && <Header />}
       <Routes>
         <Route path="/" element={user ? <HomePage /> : <LoginPage />} />
         <Route
@@ -41,9 +46,20 @@ function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/edit-user" element={<EditUserPage />} />
         <Route path="/edit-pass" element={<EditPasswordPage />} />
+        <Route path="/delete-user" element={<DeleteUserPage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
+      <ToastContainer
+        position="top-center"
+        autoClose={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        theme="light"
+      />
     </main>
   );
 }

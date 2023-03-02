@@ -3,15 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { deleteLinkService } from "../services/linksServices";
 import { VotarLink } from "./VotarLink";
-
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export const SingleLink = ({ link, removeLink, addVoteToLink }) => {
   const navigate = useNavigate();
   const { user, token } = useContext(AuthContext);
   const [error, setError] = useState("");
-  // const notify = () => toast("¿Estás seguro?");
 
   const deleteLink = async (id) => {
     try {
@@ -22,9 +19,7 @@ export const SingleLink = ({ link, removeLink, addVoteToLink }) => {
       } else {
         navigate("/");
 
-        toast.success(
-          "Acabas de borrar este link. Serás redirigido a la página principal."
-        );
+        toast("Link borrado satisfactoriamente");
       }
     } catch (error) {
       setError(error.message);
@@ -41,10 +36,11 @@ export const SingleLink = ({ link, removeLink, addVoteToLink }) => {
       </a>
 
       <p>
-        Posteado por:
+        Posteado por:{" "}
         <Link to={`/user/${link.id_user}`}>"{link.userName}"</Link> en:
         {` ${new Date(link.createdLink).toLocaleString()}`}
       </p>
+      <p>{link.description}</p>
       {link.avgVotos ? (
         <p>
           Esta publicación tiene una media de votos de {parseInt(link.avgVotos)}{" "}
@@ -54,7 +50,7 @@ export const SingleLink = ({ link, removeLink, addVoteToLink }) => {
         <p>Esta publicación aún no fue votada.</p>
       )}
       {/* Componente de votos representado con estrellas */}
-      {user.id !== link.id_user && (
+      {user?.id !== link.id_user && (
         <>
           <VotarLink
             idLink={link.id}
@@ -66,22 +62,11 @@ export const SingleLink = ({ link, removeLink, addVoteToLink }) => {
       {/* Botón de borrar link*/}
       {user && user.id === link.id_user && (
         <>
-          {/* <button
-            onClick={() => {
-              {
-                notify;
-              }
-              deleteLink(link.id);
-              console.log(notify);
-            }}
-          >
-            Notify
-          </button>
-          <ToastContainer /> */}
-
           <button
             onClick={() => {
-              if (toast.success("¿Estás seguro?")) deleteLink(link.id);
+              if (window.confirm("Vas a borrar ese link. Estas seguro?")) {
+                deleteLink(link.id);
+              }
             }}
           >
             Borrar link

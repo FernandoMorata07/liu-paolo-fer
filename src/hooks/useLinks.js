@@ -35,7 +35,8 @@ export const useLinks = () => {
   };
 
   const verLinkUser = (id) => {
-    setLinks(links.filter((link) => link.id === id));
+    setLinks(links.filter((link) => link.user_id === id.user));
+    console.log(links);
   };
 
   const addVoteToLink = ({ id, vote, newAvgVotos }) => {

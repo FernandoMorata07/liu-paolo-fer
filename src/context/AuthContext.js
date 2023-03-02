@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getMyUserDataService } from "../services/userServices";
 
 export const AuthContext = createContext();
@@ -6,6 +7,7 @@ export const AuthContext = createContext();
 export const AuthProviderComponent = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("token", token);
@@ -30,6 +32,7 @@ export const AuthProviderComponent = ({ children }) => {
   const logOut = () => {
     setToken("");
     setUser(null);
+    return navigate("/login");
   };
   return (
     <AuthContext.Provider value={{ token, user, logIn, logOut }}>

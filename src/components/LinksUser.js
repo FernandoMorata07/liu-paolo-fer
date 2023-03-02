@@ -1,22 +1,26 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useParams } from "react-router-dom";
+
+import useUser from "../hooks/useUser";
+import { ErrorMessage } from "./ErrorMessage";
 import { SingleLink } from "./SingleLink";
 
-export const LinksUser = ({ links, removeLink, addVoteToLink }) => {
-  const { user } = useContext(AuthContext);
-  return links.length ? (
+export const LinksUser = () => {
+  const { id } = useParams();
+  const { user, loading, error } = useUser(id);
+
+  if (loading) return <p>loading user data...</p>;
+  if (error) return <ErrorMessage message={error} />;
+  // console.log("este consolelog", user.links);
+
+  return (
     <ul>
-      {links.map((link) => (
-        <li key={link.id}>
-          <SingleLink
-            link={link}
-            removeLink={removeLink}
-            addVoteToLink={addVoteToLink}
-          />
-        </li>
-      ))}
+      {user.links.map((link) => {
+        return (
+          <li>
+            <SingleLink link={link} />
+          </li>
+        );
+      })}
     </ul>
-  ) : (
-    <p>No hay links creados..por {user.nombre}</p>
   );
 };

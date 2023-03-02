@@ -13,8 +13,10 @@ export const getAllLinksServices = async (token) => {
   return json.data;
 };
 
-export const getSingleLinkService = async (id) => {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND}/link/${id}`);
+export const getSingleLinkService = async (id, token) => {
+  const response = await fetch(`${process.env.REACT_APP_BACKEND}/link/${id}`, {
+    headers: { Authorization: token },
+  });
 
   const json = await response.json();
 

@@ -93,10 +93,10 @@ export const RegisterPage = () => {
             />
           </fieldset>
           <p className="condicionesDePrivacidad">
-            Al registrarte, aceptas nuestras Condiciones. Obtén más información
-            sobre cómo recopilamos, usamos y compartimos tu información en la
-            política de privacidad, asi como el uso que hacemos de las cookies y
-            tecnologias similares en nuestras Políticas de cookies.
+            Al registrarte, aceptas{" "}
+            <Link to={"/legal-notice"}>nuestras Condiciones.</Link> Obtén más
+            información sobre cómo recopilamos, usamos y compartimos tu
+            información en la política de privacidad.
           </p>
           <button className="registrarse">Regístrate</button>
           {error ? <p>{error}</p> : null}

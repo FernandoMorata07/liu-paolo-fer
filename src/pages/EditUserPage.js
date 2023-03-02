@@ -36,7 +36,6 @@ export const EditUserPage = () => {
             id="email"
             name="email"
             value={newEmail}
-            required
             onChange={(e) => setNewEmail(e.target.value)}
           />
         </fieldset>

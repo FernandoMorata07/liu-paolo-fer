@@ -12,8 +12,10 @@ export const getMyUserDataService = async ({ token }) => {
   return json.data;
 };
 
-export const getUserDataService = async (id) => {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/${id}`);
+export const getUserDataService = async (id, token) => {
+  const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/${id}`, {
+    headers: { Authorization: token },
+  });
 
   const json = await response.json();
 

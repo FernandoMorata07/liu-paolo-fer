@@ -53,7 +53,7 @@ export const NewLink = ({ addLink }) => {
         <label htmlFor="text">descripción</label>
         <input
           type="text"
-          id="descripcion"
+          id="description"
           name="description"
           placeholder="Descripción de la publicación"
         />

@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { getUserDataService } from "../services/userServices";
 
 const useUser = (id) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     const loadUser = async () => {
       try {
         setLoading(true);
-        const data = await getUserDataService(id);
+        const data = await getUserDataService(id, token);
         setUser(data);
       } catch (error) {
         setError(error.message);
@@ -20,7 +22,7 @@ const useUser = (id) => {
     };
 
     loadUser();
-  }, [id]);
+  }, [id, token]);
 
   return { user, loading, error };
 };

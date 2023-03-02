@@ -28,23 +28,8 @@ export const UserPage = () => {
         <button>
           <Link to="/edit-pass">Cambiar Contraseña</Link>
         </button>
-
-        <button
-          onClick={async () => {
-            try {
-              const res = await deleteUserService();
-
-              const json = await res.json();
-
-              if (!res.ok) {
-                throw new Error(json.message);
-              }
-            } catch (error) {
-              setError(error.message);
-            }
-          }}
-        >
-          borra usuario
+        <button>
+          <Link to="/delete-user">Borrar cuenta</Link>
         </button>
       </section>
     </>
