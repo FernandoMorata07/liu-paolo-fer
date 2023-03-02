@@ -16,8 +16,7 @@ export const HomePage = () => {
 
   console.log(links);
   return (
-    <section>
-      <h2>Aquí están los links publicados</h2>
+    <section className="homePageGlobal">
       {user && <NewLink addLink={addLink} />}
       <LinksList
         links={links}
