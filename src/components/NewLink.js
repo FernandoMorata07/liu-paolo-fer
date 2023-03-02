@@ -1,3 +1,5 @@
+import "../css/newLinkPage.css";
+
 import { useContext, useState } from "react";
 
 import { AuthContext } from "../context/AuthContext";
@@ -26,42 +28,52 @@ export const NewLink = ({ addLink }) => {
   };
 
   return (
-    <form onSubmit={handleForm}>
-      <h1>Crea tu nuevo link</h1>
-      <fieldset>
-        <label htmlFor="text">título</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          required
-          placeholder="Título de la publicación"
-        />
-      </fieldset>
-      <fieldset>
-        <label htmlFor="url">URL</label>
-        <input
-          type="url"
-          id="url"
-          name="url"
-          required
-          defaultValue={"https://www."}
-        />
-      </fieldset>
+    <>
+      <section className="newLinkGlobal">
+        <p className="tituloNuevoLink">Nueva Publicación</p>
+        <article className="estructuraFormularioNewLink">
+          <form className="estructuraFormularioNewLink" onSubmit={handleForm}>
+            <fieldset className="estructuraFieldset1">
+              <label htmlFor="text"></label>
+              <input
+                className="inputFormularioNuevoLink"
+                type="text"
+                id="title"
+                name="title"
+                required
+                placeholder="Título de la Publicación"
+              />
+            </fieldset>
+            <fieldset className="estructuraFieldset2">
+              <label htmlFor="url"></label>
+              <input
+                className="inputFormularioNuevoLink"
+                type="url"
+                id="url"
+                name="url"
+                required
+                // defaultValue={"https://www."}
+                placeholder="Pegar Link Aquí"
+              />
+            </fieldset>
 
-      <fieldset>
-        <label htmlFor="text">descripción</label>
-        <input
-          type="text"
-          id="descripcion"
-          name="description"
-          placeholder="Descripción de la publicación"
-        />
-      </fieldset>
+            <fieldset className="estructuraFieldset3">
+              <label htmlFor="text"></label>
 
-      <button>Enviar link</button>
-      {sending ? <p>Enviando link</p> : null}
-      {error ? <p>{error}</p> : null}
-    </form>
+              <input
+                className="inputFormularioNuevoLink"
+                type="text"
+                id="descripcion"
+                name="description"
+                placeholder="Descripción de la Publicación"
+              />
+            </fieldset>
+          </form>
+        </article>
+        <button className="BotonEnviarNuevoLink">Enviar Link</button>
+        {sending ? <p>Enviando link</p> : null}
+        {error ? <p>{error}</p> : null}
+      </section>
+    </>
   );
 };
