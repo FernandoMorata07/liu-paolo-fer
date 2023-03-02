@@ -9,7 +9,7 @@ export const Auth = () => {
   return (
     user && (
       <p>
-        Usuario:<Link to={`/user`}>{user.nombre} </Link> registrado
+        <Link to={`/user`}>{user.nombre} </Link> registrado
         <button onClick={() => logOut() && navigate("/login")}>Salir</button>
       </p>
     )
@@ -36,7 +36,7 @@ export const Auth = () => {
           {/* {user.nombre}{" "} */}
        /* </Link>
 
-        <button className="botonSalir" onClick={() => logOut()}>
+        <button className="botonSalir" onClick={() => logOut() && navigate("/login")}>
           Salir
           <img className="iconoSalir" src={iconSalir}></img>
         </button>
